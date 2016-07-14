@@ -59,6 +59,11 @@ int main(int argc, char* argv[])
     cout << "Cannot read a frame from video stream" << endl;
     return -1;
   }
+   // flip(frame, frame, 1);
+   Scalar colorkcf = Scalar(0, 255, 0);
+   Scalar colorRed = Scalar(0, 0, 255);
+   Scalar colorBlue = Scalar(255, 0, 0);
+   putText(frame, "Select ROI", Point(5, 20), FONT_HERSHEY_SIMPLEX, .5, colorRed, 1, CV_AA);
    Rect2d roi = selectROI("MyVideo", frame); 
    Mat target(frame, roi);
    imwrite("target.jpeg", target);
@@ -67,7 +72,6 @@ int main(int argc, char* argv[])
      return -1;
    }
 
-   Scalar colorkcf = Scalar(0, 255, 0);
    Ptr<cv::Tracker> tracker = Tracker::create("KCF");
    tracker->init(frame, roi);
 
@@ -85,11 +89,12 @@ int main(int argc, char* argv[])
       break;
     }
 
-    flip(frame, frame, 1);
+    // flip(frame, frame, 1);
     //Here we go
     tracker->update(frame, roi);
     rectangle(frame, roi, colorkcf, 1, 1);
-    putText(frame, "- KCF", Point(5, 20), FONT_HERSHEY_SIMPLEX, .5, colorkcf, 1, CV_AA);
+    putText(frame, "<<Tracking>>", Point(5, 20), FONT_HERSHEY_SIMPLEX, .5, colorRed, 1, CV_AA);
+    putText(frame, "- KCF", Point(5, 40), FONT_HERSHEY_SIMPLEX, .5, colorkcf, 1, CV_AA);
 
     imshow("MyVideo", frame); //show the frame in "MyVideo" window
 
