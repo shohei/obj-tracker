@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
    Ptr<cv::Tracker> tracker = Tracker::create("KCF");
    tracker->init(frame, roi);
 
-   // cv::VideoWriter writer( "output.avi", cv::VideoWriter::fourcc('M','J','P','G'), cap.get(cv::CAP_PROP_FPS), cv::Size((int)cap.get(cv::CAP_PROP_FRAME_WIDTH), (int)cap.get(cv::CAP_PROP_FRAME_HEIGHT)));
+   //supported codec: https://gist.github.com/takuma7/44f9ecb028ff00e2132e
    cv::VideoWriter writer( "output.mov", cv::VideoWriter::fourcc('M','P','4','V'), cap.get(cv::CAP_PROP_FPS), cv::Size((int)cap.get(cv::CAP_PROP_FRAME_WIDTH), (int)cap.get(cv::CAP_PROP_FRAME_HEIGHT)));
 
   while (1)
